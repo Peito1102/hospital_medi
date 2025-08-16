@@ -26,7 +26,7 @@ public class Role {
 
     @JsonIgnoreProperties({"roles","handler","hibernateLazyInitializer"})
     @ManyToMany(mappedBy = "roles")
-    List<User> users;
+    List<UserMedi> users;
 
     public Role() {
         this.users = new ArrayList<>();
@@ -52,11 +52,11 @@ public class Role {
         this.name = name;
     }
 
-    public List<User> getUsers() {
+    public List<UserMedi> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(List<UserMedi> users) {
         this.users = users;
     }
 

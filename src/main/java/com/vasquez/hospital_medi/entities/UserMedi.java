@@ -23,7 +23,7 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="users")
-public class User {
+public class UserMedi {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -57,7 +57,7 @@ public class User {
         enabled = true;
     }
 
-    public User() {
+    public UserMedi() {
         roles = new ArrayList<>();
     }
 
@@ -126,7 +126,7 @@ public class User {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        User other = (User) obj;
+        UserMedi other = (UserMedi) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
