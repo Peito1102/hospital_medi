@@ -16,12 +16,12 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public List<City> list_city() {
-        return cityRepository.list_city();
+        return cityRepository.findAll();
     }
 
     @Override
     public City create_city(City city) {
-        return cityRepository.create_city(city.getName());
+        return cityRepository.save(city);
     }
 
 }

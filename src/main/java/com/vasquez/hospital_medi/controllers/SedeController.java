@@ -9,25 +9,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vasquez.hospital_medi.DTO.DistrictDTO;
-import com.vasquez.hospital_medi.entities.District;
-import com.vasquez.hospital_medi.services.DistrictService;
+import com.vasquez.hospital_medi.DTO.SedeDTO;
+import com.vasquez.hospital_medi.entities.Sede;
+import com.vasquez.hospital_medi.services.SedeService;
 
 @RestController
-@RequestMapping("/api/district")
-public class DistrictController {
+@RequestMapping("/api/sede")
+public class SedeController {
 
     @Autowired
-    DistrictService districtService;
+    SedeService sedeService;
 
     @GetMapping("/list")
-    public List<District> list_district() {
-        return districtService.list_district();
+    public List<Sede> list_sede() {
+        return sedeService.list_sedes();
     }
     
     @PostMapping("/create")
-    public District create_district(@RequestBody DistrictDTO districtDTO) {
-        return districtService.create_district(districtDTO);
+    public Sede create_sede(@RequestBody SedeDTO sedeDTO) {
+        return sedeService.create_sede(sedeDTO);
     }
-
 }
