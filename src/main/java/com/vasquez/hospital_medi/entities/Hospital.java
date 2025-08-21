@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -34,7 +35,7 @@ public class Hospital {
     @JoinColumn(name = "condition_id")
     private Condition condition;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "manager_id")
     private Manager manager;
 
