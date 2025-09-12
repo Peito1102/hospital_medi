@@ -2,14 +2,18 @@ package com.vasquez.hospital_medi.entities;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "hospital")
@@ -19,25 +23,39 @@ public class Hospital {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 50, nullable = false)
+    @NotBlank(message = "El nombre no puede estar vacío")
     private String name;
 
+    @Column(length = 50, nullable = false)
+    @NotBlank(message = "La edad no puede estar vacío")
     private String age;
 
+    @Column(length = 50, nullable = false)
+    @NotBlank(message = "El area no puede estar vacío")
     private String area;
 
     private LocalDateTime date_registration;
 
     @ManyToOne
-    @JoinColumn(name = "sede_id")
+    @JoinColumn(name = "sede_id",
+                foreignKey = @ForeignKey(name= "fk_hospital_sede"))
     private Sede sede;
 
     @ManyToOne
-    @JoinColumn(name = "condition_id")
+    @JoinColumn(name = "condition_id",
+                foreignKey = @ForeignKey(name= "fk_hospital_condition"))
     private Condition condition;
 
     @OneToOne
-    @JoinColumn(name = "manager_id")
+    @JoinColumn(name = "manager_id",
+                foreignKey = @ForeignKey(name= "fk_hospital_manager"))
     private Manager manager;
+
+    @PrePersist
+    protected void onCreate() {
+        this.date_registration = LocalDateTime.now();
+    }
 
     public Long getId() {
         return id;
