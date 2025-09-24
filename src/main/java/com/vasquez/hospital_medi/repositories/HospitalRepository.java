@@ -23,4 +23,18 @@ public interface HospitalRepository extends JpaRepository<Hospital, Long>{
         @Param("manager_idh") Long manager_id
     );
 
+    @Query(value = "CALL SP_HOSPITAL_ACTUALIZAR(:idh, :nameh, :ageh, :areah, :sede_idh, :condition_idh, :manager_idh)", nativeQuery = true)
+    Hospital update_hospital(
+        @Param("idh") Long id,
+        @Param("nameh") String name,
+        @Param("ageh") String age,
+        @Param("areah") String area,
+        @Param("sede_idh") Long sede_id,
+        @Param("condition_idh") Long condition_id,
+        @Param("manager_idh") Long manager_id
+    );
+
+    @Query(value = "CALL SP_HOSPITAL_ELIMINAR(:idh)", nativeQuery = true)
+    void delete_hospital(@Param("idh") Long id);
+
 }
