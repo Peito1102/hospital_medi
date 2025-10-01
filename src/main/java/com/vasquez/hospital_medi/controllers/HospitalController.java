@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vasquez.hospital_medi.DTO.HospitalDTO;
+import com.vasquez.hospital_medi.DTO.HospitalSearchRequest;
 import com.vasquez.hospital_medi.entities.Hospital;
 import com.vasquez.hospital_medi.services.HospitalService;
 
@@ -50,9 +51,14 @@ public class HospitalController {
         hospitalService.delete_hospital(id);
     }
     
-    @PostMapping("/buscar")
-    public List<Hospital> buscar(@RequestBody HospitalSearchRequest request) {
-        return hospitalService.buscar(request.getCampo(), request.getValor());
+    @GetMapping("/findById/id")
+    public ResponseEntity<Hospital> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(hospitalService.findById(id));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Hospital>> buscar(@RequestBody HospitalSearchRequest request) {
+        return ResponseEntity.ok(hospitalService.buscar(request.getCampo(), request.getValor()));
     }
 
 }

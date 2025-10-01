@@ -18,4 +18,5 @@ public interface HospitalService {
     public Hospital findById(Long id);
 
     public List<Hospital> buscar(String campo, String valor);
+    
 }
