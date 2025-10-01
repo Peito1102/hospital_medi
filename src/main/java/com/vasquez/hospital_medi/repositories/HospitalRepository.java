@@ -3,12 +3,13 @@ package com.vasquez.hospital_medi.repositories;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.vasquez.hospital_medi.entities.Hospital;
 
-public interface HospitalRepository extends JpaRepository<Hospital, Long>{
+public interface HospitalRepository extends JpaRepository<Hospital, Long>, JpaSpecificationExecutor<Hospital> {
 
     @Query(value = "CALL SP_HOSPITAL_LISTAR()", nativeQuery = true)
     List<Hospital> list_hospital();

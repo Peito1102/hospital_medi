@@ -50,4 +50,9 @@ public class HospitalController {
         hospitalService.delete_hospital(id);
     }
     
+    @PostMapping("/buscar")
+    public List<Hospital> buscar(@RequestBody HospitalSearchRequest request) {
+        return hospitalService.buscar(request.getCampo(), request.getValor());
+    }
+
 }

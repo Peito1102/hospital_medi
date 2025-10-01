@@ -14,4 +14,8 @@ public interface HospitalService {
     public Hospital update_hospital(Long id, HospitalDTO hospitalDTO);
 
     public void delete_hospital(Long id);
+
+    public Hospital findById(Long id);
+
+    public List<Hospital> buscar(String campo, String valor);
 }

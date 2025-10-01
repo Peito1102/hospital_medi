@@ -35,4 +35,13 @@ public class HospitalServiceImpl implements HospitalService{
         hospitalRepository.delete_hospital(id);
     }
 
+    @Override
+    public Hospital findById(Long id) {
+        return hospitalRepository.findById(id).orElseThrow();
+    }
+
+    public List<Hospital> buscar(String campo, String valor) {
+        return hospitalRepository.findAll(HospitalSpecifications.contieneEnCampo(campo, valor));
+    }
+
 }
