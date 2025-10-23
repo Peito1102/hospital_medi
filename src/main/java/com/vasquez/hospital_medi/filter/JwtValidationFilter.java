@@ -50,7 +50,9 @@ public class JwtValidationFilter extends BasicAuthenticationFilter {
                 String username = claims.getSubject();
                 //String username2 = (String) claims.get("username");
 
+                @SuppressWarnings("unchecked")
                 List<String> authoritiesClaims = (List<String>) claims.get("authorities");
+                
 
 
 
