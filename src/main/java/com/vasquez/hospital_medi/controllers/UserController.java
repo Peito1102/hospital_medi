@@ -30,7 +30,7 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @GetMapping
+    @GetMapping("/list")
     public List<UserMedi> list() {
         return service.findAll();
     }

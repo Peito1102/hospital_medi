@@ -18,8 +18,8 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="users")
@@ -29,7 +29,7 @@ public class UserMedi {
     private Long id;
 
     @NotBlank
-    @Size(min = 4, max = 12)
+    @Email
     @Column(unique = true)
     private String username;
     
