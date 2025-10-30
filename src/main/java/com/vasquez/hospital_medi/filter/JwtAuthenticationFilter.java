@@ -45,11 +45,14 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         LoginRequest user = null;
         String username = null;
         String password = null;
+        System.out.println("➡ Intentando autenticar...");
 
         try {
             user = new ObjectMapper().readValue(request.getInputStream(), LoginRequest.class);
             username = user.getUsername();
             password = user.getPassword();
+            System.out.println("Usuario recibido: " + user.getUsername());
+            System.out.println("Password recibido: " + user.getPassword());
         } catch (StreamReadException e) {
             e.printStackTrace();
         } catch (DatabindException e) {
@@ -83,15 +86,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .signWith(SECRET_KEY)
                 .compact();
 
-                response.addHeader(HEADER_AUTHORIZATION , PREFIX_TOKEN + token);
+                response.addHeader(HEADER_AUTHORIZATION , token);
 
-                Map<String, String> body = new HashMap<>();
-                body.put("token", token);
-                body.put("username", username);
-                body.put("message", String.format("Hola %s has iniciado sesion con exito!", username));
-
-                response.getWriter().write(new ObjectMapper().writeValueAsString(body));
-                response.setContentType(CONTENT_TYPE);
                 response.setStatus(200);
 
     }
