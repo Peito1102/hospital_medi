@@ -18,7 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vasquez.hospital_medi.entities.UserMedi;
+import com.vasquez.hospital_medi.DTO.LoginRequest;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -42,12 +42,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
-        UserMedi user = null;
+        LoginRequest user = null;
         String username = null;
         String password = null;
 
         try {
-            user = new ObjectMapper().readValue(request.getInputStream(), UserMedi.class);
+            user = new ObjectMapper().readValue(request.getInputStream(), LoginRequest.class);
             username = user.getUsername();
             password = user.getPassword();
         } catch (StreamReadException e) {
