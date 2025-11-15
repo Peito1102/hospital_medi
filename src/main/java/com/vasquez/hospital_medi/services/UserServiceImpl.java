@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.vasquez.hospital_medi.DTO.UserRegister;
 import com.vasquez.hospital_medi.entities.Role;
 import com.vasquez.hospital_medi.entities.UserMedi;
 import com.vasquez.hospital_medi.repositories.RoleRepository;
@@ -37,9 +38,10 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
-    public UserMedi save(UserMedi user) {
+    public UserMedi save(UserRegister userDTO) {
         Optional<Role> optionalRoleUser = roleRepository.findByName("ROLE_USER");
         List<Role> roles = new ArrayList<>();
+        UserMedi user = new UserMedi();
 
         optionalRoleUser.ifPresent(roles::add);
         
@@ -48,8 +50,13 @@ public class UserServiceImpl implements UserService{
             optionalRoleAdmin.ifPresent(roles::add);
         }
 
+        user.setUsername(userDTO.getUsername());
+        user.setName(userDTO.getName());
+        user.setLastName(userDTO.getLastName());
+        user.setDni(userDTO.getDni());
+        user.setPhone(userDTO.getPhone());
         user.setRoles(roles);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         return userRepository.save(user);
     }
 

@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "condition")
+@Table(name = "`condition`")
 public class Condition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

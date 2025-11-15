@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vasquez.hospital_medi.DTO.UserRegister;
 import com.vasquez.hospital_medi.entities.UserMedi;
 import com.vasquez.hospital_medi.services.UserService;
 
@@ -37,7 +38,7 @@ public class UserController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody UserMedi user, BindingResult result) {
+    public ResponseEntity<?> create(@Valid @RequestBody UserRegister user, BindingResult result) {
         if (result.hasFieldErrors()) {
             return validation(result);
         }
@@ -45,9 +46,8 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid @RequestBody UserMedi user, BindingResult result) {
+    public ResponseEntity<?> register(@Valid @RequestBody UserRegister user, BindingResult result) {
         
-        user.setAdmin(false);
         return create(user, result);
     }
     
